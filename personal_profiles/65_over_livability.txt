@@ -1,0 +1,16 @@
+id	012
+name	Over 65 years
+name_file	65_over_livability
+Mass	73.9
+Height	-9999
+AD	1.78
+Tsk_C	35
+A_eff	0.73
+Emm_sk	0.98
+Icl	0.36
+Re_cl	0.01
+M	1.8
+W	0
+wmax_condition	OLD_Morris_2021
+smax_rate	0.51
+
