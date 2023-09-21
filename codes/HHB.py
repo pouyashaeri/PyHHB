@@ -51,7 +51,6 @@ Subject Characteristics - Corporal
     			
     - wmax_condition =  Maximum skin wettedness (dimentionless)
     - Max sweat rate (L/hr)
-    - WBSR = None whole body sweat rate based on changes in body mass over time (in g/min);
     
 
 Environmental Characteristics - Ambiental 
@@ -83,10 +82,9 @@ import pandas as pd
 # Defining constants
 # =============================================================================
 σ = 5.67E-08	#W·m-2·K-4	Stefan-Boltzmann constant.
-Lh_vap_water = 2430	#J·kg-1	Heat of vaporisation of water at 30⁰C. 
 LR	= 16.5	#K·kPa-1	Lewis Relation.
 
-Lh_vap =  2426	#J·g-1	Heat of vaporisation of Sweat heat capacity at 30⁰C. 
+Lh_vap =  2426	#J·g-1	Heat of vaporisation of Sweat heat at 30⁰C. 
 #Gagnon, D., & Crandall, C. G. (2018). Sweating as a heat loss thermoeffector.
 # Handbook of Clinical Neurology, 156, 211–232. https://doi.org/10.1016/B978-0-444-63912-7.00013-8
    
@@ -812,10 +810,9 @@ def Survivability(Exp_time:float,Ereq:float,Emax_wettedness:float,Emax_sweat:flo
     Returns
     -------
     survivability : boolean
-        Could a person with a given personal profile survive a given thermal environment? yes, no
+        Could a person with a given personal profile exposed to a certain survive a given thermal environment? yes, no
     flag_survivability : int
-        Flag that indicates the survivability type according to the physiological 
-        constraints imposed in this model
+        Flag that indicates the survivability type according to the physiological constraints imposed in this model
     
     '''    
     valid = {1, 3, 6}
@@ -875,7 +872,9 @@ def livability_Mmax(survivability: bool,Ereq:float,Emax_wettedness:float,Emax_sw
     
         M_max  = Emax_lim  -  H_loss   
         
-    Notice that H_loss can be represented either by (Hdry +Cres +Eres) or (Ereq + Hprod). 
+    Notice that:
+        - Emax_lim is the minimum value among Emax_wettedness and Emax_sweat
+        - H_loss can be represented either by (Hdry +Cres +Eres) or (Ereq + Hprod). 
     
     Also if Mmax is cero or less than cero means the thermal load is non-compensable, then that person 
     can survive but is not able to live (no activity is possible without storage heat internally).
